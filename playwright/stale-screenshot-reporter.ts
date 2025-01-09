@@ -2,7 +2,7 @@
 Copyright 2024 New Vector Ltd.
 Copyright 2024 The Matrix.org Foundation C.I.C.
 
-SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only
+SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only OR LicenseRef-Element-Commercial
 Please see LICENSE files in the repository root for full details.
 */
 
@@ -23,6 +23,7 @@ class StaleScreenshotReporter implements Reporter {
     private success = true;
 
     public onTestEnd(test: TestCase): void {
+        if (!test.ok()) return;
         for (const annotation of test.annotations) {
             if (annotation.type === "_screenshot") {
                 this.screenshots.add(annotation.description);
